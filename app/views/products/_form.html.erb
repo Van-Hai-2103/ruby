@@ -1,25 +1,122 @@
-<%= form_with model: product do |form| %>
-    <div>
-      <%= form.label :name %>
-      <%= form.text_field :name %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            backdrop-filter: blur(10px);
+        }
+        .form-container:hover {
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+        .form-container div {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        input[type="file"],
+        .rich-text-area {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        input[type="file"]:focus,
+        .rich-text-area:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        input[type="submit"]:active {
+            transform: translateY(-2px);
+        }
+        input[type="submit"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+        }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+                padding: 15px;
+            }
+            input[type="submit"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <%= form_with model: product do |form| %>
+            <div>
+                <%= form.label :name %>
+                <%= form.text_field :name, placeholder: "Enter product name" %>
+            </div>
+            <div>
+                <%= form.label :description %>
+                <%= form.rich_text_area :description, class: "rich-text-area", placeholder: "Enter product description" %>
+            </div>
+            <div>
+                <%= form.label :featured_image %>
+                <%= form.file_field :featured_image, accept: "image/*" %>
+            </div>
+            <div>
+                <%= form.label :inventory_count %>
+                <%= form.number_field :inventory_count, placeholder: "Enter inventory count" %>
+            </div>
+            <div>
+                <%= form.submit "Submit" %>
+            </div>
+        <% end %>
     </div>
-
-    <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.rich_text_area :description %>
-  </div>
-  <div>
-    <%= form.label :featured_image, style: "display: block" %>
-    <%= form.file_field :featured_image, accept: "image/*" %>
-  </div>
-
-  <div>
-    <%= form.label :inventory_count, style: "display: block" %>
-    <%= form.number_field :inventory_count %>
-  </div>
-
-    <div>
-      <%= form.submit %>
-    </div>
-  <% end %>
-  
+</body>
+</html>
