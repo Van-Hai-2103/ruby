@@ -88,6 +88,7 @@ production:
     database: lvh_production
     username: lvh
     password: <%= ENV["LVH_DATABASE_PASSWORD"] %>
+    url: <%= ENV['DATABASE_URL'] %>
   cache:
     <<: *primary_production
     database: lvh_production_cache
